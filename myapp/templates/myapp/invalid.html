@@ -1,0 +1,7 @@
+{% extends "myapp/base.html" %}
+{% block body %}
+<div class="flex flex-col justify-center items-center min-h-screen">
+    <h1 class="font-bold text-lg">You have no access to this operation</h1>
+     <p><span><a class="text-indigo-500" href="{% url 'myapp:dashboard' %}">Click here</a>go to dashboard</span></p>
+</div>
+{% endblock %}

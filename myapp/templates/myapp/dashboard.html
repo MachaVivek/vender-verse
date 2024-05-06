@@ -1,0 +1,45 @@
+{% extends 'myapp/base.html' %} 
+{% block body %}
+    <div class="flex justify-between">
+        <div class="ml-20 mt-10 font-bold text-xl">My Products</div>
+        <div class="ml-20 mt-10">
+            <a class="bg-green-500 text-white px-2 py-4 mr-8" href="{% url 'myapp:createproduct' %}">New Product</a>
+        </div>
+    </div>
+
+    <div class="products-container p-10 m-5">
+        {% for product in products %}  
+        <div class="flex shadow-lg m-5 p-2 justify-between">
+            <div class="flex w-1/4">
+                <img class="h-20" src="https://a1indiangroceries.com/images/no_product.jpg" alt="image">
+                <div class="relative group">
+                    <a href="{% url 'myapp:editproduct' product.id %}">
+                        <div class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 bottom-0 p-4 justify-center items-end bg-white font-semibold">
+                            Edit Product
+                        </div>
+                        <div class="ml-5">
+                            <div class="font-bold text-sm"> {{ product.name }}</div>
+                            <div class="text-sm text-green-500">${{ product.price }}</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="text-2xl text-green-500">$ {{ product.total_sales_amount }}</div>
+                <div class="text-xs">Total earnings</div>
+            </div>
+            <div>
+                <div class="text-2xl">{{ product.total_sales }}</div>
+                <div class="text-xs">Total orders</div>
+            </div>
+            <div class="pr-5">
+                <div class="text-2xl">4.8</div>
+                <div class="text-xs">Rating</div>
+            </div>
+        </div> 
+           
+            
+        {% endfor %}
+    </div>
+{% endblock %}

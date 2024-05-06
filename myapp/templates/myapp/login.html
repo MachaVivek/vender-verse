@@ -1,0 +1,23 @@
+{% extends 'myapp/base.html' %} 
+{% block body %}
+<div class="flex flex-col justify-center items-center min-h-screen">
+    <h1 class="font-bold text-lg">🔐 Login</h1>
+     <form class="shadow-lg p-10" method="POST">
+        {% csrf_token %}
+        <div class="mb-2">
+            <label >Username</label>
+            <div class="border rounded py-2 px-2 mr-10">
+                {{ form.username }}
+            </div>
+        </div>
+        <div class="mb-2">
+            <label >Password</label>
+            <div class="border rounded py-2 px-2 mr-10">
+                {{ form.password }}
+            </div>
+        </div>
+        <button class="bg-green-500 text-white px-4 py-2" type="submit">Login</button>
+    </form>
+     <p><span><a class="text-indigo-500" href="{% url 'myapp:register' %}">Click here</a> to register</span></p>
+</div>
+{% endblock %}

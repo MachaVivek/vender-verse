@@ -1,0 +1,7 @@
+{% extends "myapp/base.html" %}
+{% block body %}
+<div class="grid place-items-center h-screen">
+    <div class="font-bold text-6xl">payment successfull</div>
+    <a href="{% url 'myapp:index' %}">go to home page</a>
+</div>
+{% endblock %}

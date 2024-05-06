@@ -1,0 +1,18 @@
+{% extends "myapp/base.html" %}
+
+{% block body %}
+<div class="flex p-20">
+    <div>
+        <img src="https://a1indiangroceries.com/images/no_product.jpg" alt="no product">
+    </div>
+    <div class="pl-10">
+        <div class="text-4xl mb-4">{{product.name}}</div>
+        <div class="mb-4">{{product.description}}</div>
+        <div class="mb-4 text-green-700 font-bold text-2xl">${{product.price}}</div>
+        <a href="{% url 'myapp:checkout_payment' product.id %}" class="block w-max">
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" id="checkout-button">Buy</button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

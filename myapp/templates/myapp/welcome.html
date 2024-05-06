@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .created-by {
+            margin-top: 30px;
+            color: #888;
+        }
+        .features {
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .features li {
+            margin-bottom: 10px;
+        }
+        .created-by p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Vender Verse</h1>
+        <div class="features">
+            <h2>Key Features:</h2>
+            <ul>
+                <li>Authentication: Implement secure registration and login systems for both sellers and customers to access the platform.</li>
+                <li>Buying and Selling: Enable sellers to list products for sale and customers to browse and purchase items.</li>
+                <li>Payment Integration: Integrate PayPal or similar payment gateways to facilitate secure transactions between buyers and sellers.</li>
+                <li>Sales Analysis: Provide sellers with analytics tools to track sales performance, including revenue, popular products, and customer demographics.</li>
+                <li>Order Management: Allow sellers to manage orders, including order processing, shipping, and tracking.</li>
+                <li>Feedback and Ratings: Enable customers to leave feedback and ratings for products, fostering trust and transparency within the platform.</li>
+            </ul>
+        </div>
+        <div>
+            <a href="{% url 'myapp:index' %}" class="btn">Go to Website</a>
+        </div>
+        <div class="created-by">
+            <h2>Created by:</h2>
+            <p><a href="https://github.com/MachaVivek">Vivek Macha</a></p>
+            <p><a href="https://github.com/Nagamytreya">NagaMyterya Gulbhum</a></p>
+        </div>
+    </div>
+</body>
+</html>

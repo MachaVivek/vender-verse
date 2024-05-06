@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <Script src="https://cdn.tailwindcss.com"></Script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <nav class="shadow-lg">
+        <div class="flex flex-wrap items-center justify-between ml-5 p-6">
+            <a href="{% url 'myapp:index' %}" class="flex items-center">
+                <img class="h-9 mr-3" src="https://static.thenounproject.com/png/1239189-200.png" alt="logo">
+                <span class="self-center text-xl font-semibold">VenderVerse</span>
+            </a>
+            <div class="flex items-center">
+                <a href="{% url 'myapp:dashboard' %}" class="mr-6 text-5m font-medium text-gray-500">
+                    <span class="self-center text-xl font-semibold">Dashboard</span>
+                </a>
+                <a href="{% url 'myapp:sales' %}" class="mr-6 text-5m font-medium text-gray-500">
+                    <span class="self-center text-xl font-semibold">Sales</span>
+                </a>
+                <a href="{% url 'myapp:createproduct' %}" class="mr-6 text-5m font-medium text-gray-500">
+                    <span class="self-center text-xl font-semibold">Create Products</span>
+                </a>
+                <a href="{% url 'myapp:purchases' %}" class="mr-6 text-5m font-medium text-gray-500">
+                    <span class="self-center text-xl font-semibold">My Purchases</span>
+                </a>
+                {% if user.is_authenticated %}
+                        <a href="{% url 'myapp:logout' %}" class="mr-6 text-5m font-medium text-gray-500">
+                            <span class="self-center text-xl font-semibold">Logout</span>
+                        </a>
+                {% else %}
+                    <a href="{% url 'myapp:login' %}" class="mr-6 text-5m font-medium text-gray-500">
+                        <span class="self-center text-xl font-semibold">Login</span>
+                    </a>
+                {% endif %}
+                
+            </div>
+        </div>
+    </nav>
+    {% block body %}
+    
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,177 @@
+{% extends 'myapp/base.html' %} 
+{% block body %}
+<div class="flex justify-between">
+    <div class="ml-10 mt-10 font-bold text-xl">Sales Stats</div>
+    <div class="mr-20 mt-10">
+        <a class="bg-green-500 text-white px-2 py-4" href="{% url 'myapp:dashboard' %}">Dashboard</a>
+    </div>
+</div>
+
+<div class="shadow-lg p-10 m-5">
+    <div class="text-5xl font-bold">$ {{ total_sales.amount__sum }}</div>
+    <div class="mt-10">Your Lifetime Revenue</div>
+
+</div>
+
+<div class="flex">
+    <div class="p-5 w-1/3">
+        <div class="shadow-lg p-10">
+            <div class="text-4xl font-bold">$ {{yearly_sales.amount__sum}}</div>
+            <div>Last 365 days</div>
+        </div>
+    </div>
+
+     <div class="p-5 w-1/3">
+        <div class="shadow-lg p-10">
+            <div class="text-4xl font-bold">$ {{monthly_sales.amount__sum}}</div>
+            <div>Last 30 days</div>
+        </div>
+    </div>
+
+     <div class="p-5 w-1/3">
+        <div class="shadow-lg p-10">
+            <div class="text-4xl font-bold">$ {{weekly_sales.amount__sum}}</div>
+            <div>Last 7 days</div>
+        </div>
+    </div>
+
+   
+</div>
+
+<div class="flex">
+    <div class="w-1/2 shadow-lg m-10" id="sales-table">
+        <div class="ml-10 mt-10 font-bold text-xl">30 Day Sales</div>
+        <div class="flex m-10 mt-5 mb-5">
+            <div class="w-1/2">
+                Day
+            </div>
+            <div class="w-1/2">
+                Total Sales
+            </div>
+
+        </div>
+        {% for daily_sales_sum in daily_sales_sums %}
+        <div class="flex m-10 mt-5 mb-5 ">
+            <div class="w-1/2 created-date"> {{ daily_sales_sum.created_on__date }}</div>
+            <div class="w-1/2 day-sum font-bold text-green-500">{{ daily_sales_sum.sum }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="w-1/2 shadow-lg m-10 p-10">
+        <div class="mr-10 mt-10 font-bold text-xl">30 Day Sales</div>
+            <canvas id="myChart"></canvas>
+        
+    </div>
+
+</div>
+
+<div class="flex">
+    <div class="w-1/2 shadow-lg m-10 p-10">
+        <div class="mr-10 mt-10 font-bold text-xl">Product Sales Distribution</div>
+            <canvas id="myChart1"></canvas>
+        
+    </div>
+    
+    <div class="w-1/2 shadow-lg m-10">
+        <div class="ml-10 mt-10 font-bold text-xl">Product Sales</div>
+        <div class="flex m-10 mt-5 mb-5">
+            <div class="w-1/2">
+                Product Name
+            </div>
+            <div class="w-1/2">
+                Total Sales
+            </div>
+
+        </div>
+        {% for product_sales_sum in product_sales_sums %}
+        <div class="flex m-10 mt-5 mb-5 ">
+            <div class="w-1/2 product-name"> {{ product_sales_sum.product__name }}</div>
+            <div class="w-1/2 product-sum font-bold text-green-500">{{ product_sales_sum.sum }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script>
+
+  const sums = document.getElementsByClassName('day-sum')
+  const sum_values =[]
+  for(let i=0;i<sums.length;i++){
+    single_sum = sums[i].innerText
+    sum_values.push(parseInt(single_sum))
+  }
+  
+
+
+  const dates = document.getElementsByClassName('created-date')
+  const date_values =[]
+  for(let i=0;i<dates.length;i++){
+    single_date = dates[i].innerText
+    date_values.push(single_date)
+  }
+ 
+
+  const product_names = document.getElementsByClassName('product-name')
+  const name_values =[]
+  for(let i=0;i<product_names.length;i++){
+    single_name = product_names[i].innerText
+    name_values.push(single_name)
+  }
+  
+  const product_sums = document.getElementsByClassName('product-sum')
+  const product_sum_values =[]
+  for(let i=0;i<product_sums.length;i++){
+    single_sum = product_sums[i].innerText
+    product_sum_values.push(single_sum)
+  }
+  console.log(product_sum_values)
+
+
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: date_values,
+      datasets: [{
+        label: 'Sales for the past 30 days',
+        data: sum_values,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
+
+  const ctx1 = document.getElementById('myChart1');
+
+  new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: name_values,
+      datasets: [{
+        label: 'Product sales sum',
+        data: product_sum_values,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+        
+   
+{% endblock %}
